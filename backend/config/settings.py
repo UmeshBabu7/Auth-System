@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PART_APPS = ["rest_framework"]
+THIRD_PART_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
+]
 LOCAL_APPS = ["users"]
 
 INSTALLED_APPS += THIRD_PART_APPS + LOCAL_APPS
@@ -72,6 +77,8 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("users.authentication.CookieJWTAuthentication",)
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -107,3 +114,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=0.2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,
+}
