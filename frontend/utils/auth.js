@@ -27,3 +27,14 @@ export const loginUser = async (email, password) => {
     throw new Error("Login failed!");
   }
 };
+
+export const logoutUser = async () => {
+  try {
+    const response = await axios.post(`${API_URL}logout/`, null, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (e) {
+    throw new Error("Logout failed!");
+  }
+};
