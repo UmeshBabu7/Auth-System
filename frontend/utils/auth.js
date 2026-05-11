@@ -38,3 +38,14 @@ export const logoutUser = async () => {
     throw new Error("Logout failed!");
   }
 };
+
+export const getUserInfo = async () => {
+  try {
+    const response = await axios.get(`${API_URL}user-info/`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (e) {
+    throw new Error("Getting user failed!");
+  }
+};
