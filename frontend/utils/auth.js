@@ -49,3 +49,14 @@ export const getUserInfo = async () => {
     throw new Error("Getting user failed!");
   }
 };
+
+export const refreshToken = async () => {
+  try {
+    const response = await axios.post(`${API_URL}refresh/`, null, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (e) {
+    throw new Error("Refreshing token failed!");
+  }
+};
