@@ -1,16 +1,16 @@
-# 🔐 Auth System
+# Auth System
 
 A minimal full-stack authentication boilerplate built with **Django REST Framework** and **Next.js**. Designed as a clean, reusable starting point for projects that need secure cookie-based JWT authentication.
 
 ---
 
-## 📌 Overview
+## Overview
 
 This project implements the core authentication flow — register, login, logout, token refresh, and fetching the current user — using **HttpOnly cookies** for secure token storage. It is intentionally small and focused, making it easy to extend into a larger application.
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 Auth-System/
@@ -33,7 +33,7 @@ Auth-System/
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 ### Backend
 | Technology | Version | Purpose |
@@ -55,7 +55,7 @@ Auth-System/
 
 ---
 
-## 🔑 How Authentication Works
+## How Authentication Works
 
 1. **Register** — creates a new user with email + username + password
 2. **Login** — validates credentials, generates a JWT access & refresh token pair, and sets them as **HttpOnly cookies** (`access_token`, `refresh_token`) — never exposed to JavaScript
@@ -72,11 +72,11 @@ Auth-System/
 | Access token lifetime | ~12 seconds (dev/testing value — increase for production) |
 | Refresh token lifetime | 1 day |
 
-> ⚠️ The access token lifetime is set to `0.2 minutes` (12 seconds) by default — this is intentionally short for testing the refresh flow. Set it to a sensible value (e.g. `timedelta(hours=1)`) before going to production.
+> The access token lifetime is set to `0.2 minutes` (12 seconds) by default — this is intentionally short for testing the refresh flow. Set it to a sensible value (e.g. `timedelta(hours=1)`) before going to production.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Backend Setup
 
@@ -120,7 +120,7 @@ Backend API: `http://localhost:8000/api/users/`
 
 ---
 
-## 🔐 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description | Auth required |
 |---|---|---|---|
@@ -133,7 +133,7 @@ Backend API: `http://localhost:8000/api/users/`
 
 ---
 
-## 👤 User Model
+## User Model
 
 The custom `CustomUser` model removes Django's default `username` field and uses **email as the unique identifier**:
 
@@ -146,7 +146,7 @@ class CustomUser(AbstractUser):
 
 ---
 
-## 📁 Frontend Pages
+## Frontend Pages
 
 | Page | Path | Description |
 |---|---|---|
@@ -158,7 +158,7 @@ All API calls are centralized in `utils/auth.js` using Axios with `withCredentia
 
 ---
 
-## 🛠️ Developer Notes
+## Notes
 
 - **Cookie auth instead of Bearer tokens** — the custom `CookieJWTAuthentication` class overrides SimpleJWT's default header-based auth to read from cookies instead
 - **Token blacklisting is enabled** — `rest_framework_simplejwt.token_blacklist` is installed, so refresh tokens are invalidated on logout
